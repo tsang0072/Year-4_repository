@@ -1,17 +1,40 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
+using UnityEngine.Video;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed=10f;
-    public float rotateSpeed=10f;
-    Vector3 moveAmount;
+    public float moveSpeed;
+    Vector2 moveInput;
+    //public float groundDist;
+    public float jumpForce;
+    [SerializeField]bool jumpInput;
     
+    public LayerMask ground;
+    public Transform grdChecker;
+    [SerializeField]bool isGrounded;
+
+    public bool flipped;
+    public float flipSpeed;
+    Quaternion flipL=Quaternion.Euler(0,180,0);
+    quaternion flipR=Quaternion.Euler(0,0,0);
+
+    public float rayLength;
+    //public SpriteRenderer sr;
+    // public SpriteRenderer sr_body;
+    // public SpriteRenderer sr_wing;
+    // public SpriteRenderer sr_leg1;
+    // public SpriteRenderer sr_leg2;
+    public Rigidbody rb;
     Animator anime;
     
 
-    Rigidbody rb;
     void Start() 
     {
         rb=GetComponent<Rigidbody>();
@@ -20,29 +43,49 @@ public class PlayerController : MonoBehaviour
     }
     void Update() 
     {
-        Vector3 moveDirection=new Vector3(-Input.GetAxis("Horizontal"),0,-Input.GetAxis("Vertical")).normalized;
-        
-        moveAmount=moveDirection*moveSpeed*Time.deltaTime;
-        
-        
-        if(Input.GetAxis("Horizontal")!=0||Input.GetAxis("Vertical")!=0)
-        {
-            anime.SetBool("Walk",true);
-            anime.SetBool("Idle",false);
-        }else
-        {
-            anime.SetBool("Walk",false);
-            anime.SetBool("Idle",true);
-        }
-        
+       moveInput.x=Input.GetAxis("Horizontal");
+       moveInput.y=Input.GetAxis("Vertical");
+
+       if(Input.GetKeyDown(KeyCode.Space)&&isGrounded)
+       jumpInput=true;
+
+       if(!flipped&&moveInput.x<0)
+       {
+            flipped=true;
+       }else if(flipped&&moveInput.x>0)
+       {
+            flipped=false;
+       }
+       if(flipped)
+       {
+            transform.rotation=Quaternion.Slerp(transform.rotation, flipL, flipSpeed*Time.deltaTime);
+       }else if(!flipped)
+       {
+            transform.rotation=Quaternion.Slerp(transform.rotation, flipR, flipSpeed*Time.deltaTime);
+       }
  
-        Vector3 targetDir=Vector3.Slerp(transform.forward,moveDirection,rotateSpeed*Time.deltaTime);
-        transform.rotation=Quaternion.LookRotation(targetDir);
-       
     }
-    private void FixedUpdate() 
+    void FixedUpdate()
     {
-        rb.MovePosition(rb.position+moveAmount);
-        
+        rb.velocity=new Vector3(moveInput.x*moveSpeed, rb.velocity.y, moveInput.y*moveSpeed);   
+        RaycastHit hit;
+        if(Physics.Raycast(grdChecker.position, Vector3.down, out hit, rayLength, ground))
+        {
+            isGrounded=true;
+        }
+        else 
+        {
+            isGrounded=false;
+        }
+
+        if(jumpInput)
+        Jump();
+
+    }
+
+    void Jump()
+    {
+        rb.velocity=new Vector3(0f, jumpForce, 0f);
+        jumpInput=false;
     }
 }
