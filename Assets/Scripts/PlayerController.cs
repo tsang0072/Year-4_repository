@@ -26,19 +26,15 @@ public class PlayerController : MonoBehaviour
     quaternion flipR=Quaternion.Euler(0,0,0);
 
     public float rayLength;
-    //public SpriteRenderer sr;
-    // public SpriteRenderer sr_body;
-    // public SpriteRenderer sr_wing;
-    // public SpriteRenderer sr_leg1;
-    // public SpriteRenderer sr_leg2;
-    public Rigidbody rb;
-    Animator anime;
+
+    Rigidbody rb;
+    
     
 
     void Start() 
     {
         rb=GetComponent<Rigidbody>();
-        anime=GetComponent<Animator>();
+    
         
     }
     void Update() 
@@ -63,6 +59,7 @@ public class PlayerController : MonoBehaviour
        {
             transform.rotation=Quaternion.Slerp(transform.rotation, flipR, flipSpeed*Time.deltaTime);
        }
+
  
     }
     void FixedUpdate()
@@ -72,10 +69,12 @@ public class PlayerController : MonoBehaviour
         if(Physics.Raycast(grdChecker.position, Vector3.down, out hit, rayLength, ground))
         {
             isGrounded=true;
+        
         }
         else 
         {
             isGrounded=false;
+            
         }
 
         if(jumpInput)
@@ -87,5 +86,6 @@ public class PlayerController : MonoBehaviour
     {
         rb.velocity=new Vector3(0f, jumpForce, 0f);
         jumpInput=false;
+  
     }
 }
