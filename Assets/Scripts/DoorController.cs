@@ -5,36 +5,71 @@ using UnityEngine;
 public class DoorController : MonoBehaviour
 {
     Animator bottunController;
-    // public GameObject door1;
-    // public GameObject door2;
-    bool buttonPressed = false;
-    // bool door2Triggerd = false;
+    bool buttonPress_1 = false;
+    bool buttonPress_2 = false;
+    bool door1Open=false;
+    bool door2Open=true;
 
     void Start()
     {
         bottunController = GetComponent<Animator>();
     }
-
+    void Update()
+    {
+        if (buttonPress_1 && Input.GetKeyDown(KeyCode.E))
+        {
+            bottunController.SetTrigger("TrPress");
+            if (!door1Open)
+            {
+                GameObject.Find("Door1").GetComponent<Animator>().SetTrigger("TrOpen");
+                door1Open = true;
+            }
+            else if (door1Open)
+            {
+                GameObject.Find("Door1").GetComponent<Animator>().SetTrigger("TrClose");
+                door1Open = false;
+            }
+            if (door2Open)
+            {
+                GameObject.Find("Door2").GetComponent<Animator>().SetTrigger("TrClose");
+                door2Open = false;
+            }
+            else if (!door2Open)
+            {
+                GameObject.Find("Door2").GetComponent<Animator>().SetTrigger("TrOpen");
+                door2Open = true;
+            }
+        }
+        if (buttonPress_2 && Input.GetKeyDown(KeyCode.E))
+        {
+            bottunController.SetTrigger("TrPress");
+            if (!door2Open)
+            {
+                GameObject.Find("Door2").GetComponent<Animator>().SetTrigger("TrOpen");
+                door2Open = true;
+            }
+            else if (door2Open)
+            {
+                GameObject.Find("Door2").GetComponent<Animator>().SetTrigger("TrClose");
+                door2Open = false;
+            }
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        // if (!buttonPressed)
-        // {
-        //     Debug.Log("Can press E");
-       
-        //      bottunController.SetBool("buttonPressed",true);
-        //     buttonPressed=true;
-        // }
-        // if (buttonPressed)
-        // {
-        //     bottunController.SetBool("buttonPressed", false);
-        //     buttonPressed=false;
-        // }
-        if (Input.GetKeyDown(KeyCode.E))
+        if (other.CompareTag("Player"))
         {
-            bottunController.Play("button_press",0,0.2f);
-            Debug.Log("pressed E");
-
+            Debug.Log("Can press E");
+            if (this.gameObject.name == "Button1")
+                buttonPress_1 = true;
+            if(this.gameObject.name=="Button2")
+            buttonPress_2 = true;
         }
+    }
+    void OnTriggerExit(Collider other)
+    {
+        buttonPress_1 = false;
+        buttonPress_2=false;   
     }
 }
