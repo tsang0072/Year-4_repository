@@ -43,15 +43,17 @@ public class DoorController : MonoBehaviour
         if (buttonPress_2 && Input.GetKeyDown(KeyCode.E))
         {
             bottunController.SetTrigger("TrPress");
-            if (!door2Open)
+            if (door2Open)
             {
+                Debug.Log("door2"+door2Open);
                 GameObject.Find("Door2").GetComponent<Animator>().SetTrigger("TrOpen");
-                door2Open = true;
-            }
-            else if (door2Open)
-            {
-                GameObject.Find("Door2").GetComponent<Animator>().SetTrigger("TrClose");
                 door2Open = false;
+            }
+            else if (!door2Open)
+            {
+                Debug.Log("door2"+door2Open);
+                GameObject.Find("Door2").GetComponent<Animator>().SetTrigger("TrClose");
+                door2Open = true;
             }
         }
     }

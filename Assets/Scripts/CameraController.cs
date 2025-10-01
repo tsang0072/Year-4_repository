@@ -2,26 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.XR;
 
 public class CameraController : MonoBehaviour
 {
-    public static CameraController instance;
-    // public Transform player;
-    // private Vector3 offset;
     public CinemachineVirtualCamera roomCam;
     private CinemachineVirtualCamera followCam;
+
     
-     void Awake() {
-        if(!instance){
-            instance=this;
-        }else if(instance!=this){
-            Destroy(gameObject);
-        }
-        DontDestroyOnLoad(gameObject);
-    }
     void Start()
     {
-        //offset=transform.position-player.position;
+        if (followCam == null)
         followCam = GameObject.Find("VCam_Follow").GetComponent<CinemachineVirtualCamera>();
     }
 
@@ -38,8 +29,9 @@ public class CameraController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            roomCam.Priority = 0; 
-            followCam.Priority = 20;   
+            roomCam.Priority = 0;
+            followCam.Priority = 20;
+            
         }
     }
 }
