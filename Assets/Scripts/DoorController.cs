@@ -4,74 +4,32 @@ using UnityEngine;
 
 public class DoorController : MonoBehaviour
 {
-    Animator bottunController;
-    bool buttonPress_1 = false;
-    bool buttonPress_2 = false;
-    bool door1Open=false;
-    bool door2Open=true;
+     public enum DoorType { OpenLeft, OpenRight }
+    public DoorType doorType;
+
+    public bool isOpenAtStart = false;
+    private bool isOpen;
+    private Animator animator;
 
     void Start()
     {
-        bottunController = GetComponent<Animator>();
-    }
-    void Update()
-    {
-        if (buttonPress_1 && Input.GetKeyDown(KeyCode.E))
-        {
-            bottunController.SetTrigger("TrPress");
-            if (!door1Open)
-            {
-                GameObject.Find("Door1").GetComponent<Animator>().SetTrigger("TrOpen");
-                door1Open = true;
-            }
-            else if (door1Open)
-            {
-                GameObject.Find("Door1").GetComponent<Animator>().SetTrigger("TrClose");
-                door1Open = false;
-            }
-            if (door2Open)
-            {
-                GameObject.Find("Door2").GetComponent<Animator>().SetTrigger("TrClose");
-                door2Open = false;
-            }
-            else if (!door2Open)
-            {
-                GameObject.Find("Door2").GetComponent<Animator>().SetTrigger("TrOpen");
-                door2Open = true;
-            }
-        }
-        if (buttonPress_2 && Input.GetKeyDown(KeyCode.E))
-        {
-            bottunController.SetTrigger("TrPress");
-            if (door2Open)
-            {
-                Debug.Log("door2"+door2Open);
-                GameObject.Find("Door2").GetComponent<Animator>().SetTrigger("TrOpen");
-                door2Open = false;
-            }
-            else if (!door2Open)
-            {
-                Debug.Log("door2"+door2Open);
-                GameObject.Find("Door2").GetComponent<Animator>().SetTrigger("TrClose");
-                door2Open = true;
-            }
-        }
+        animator = GetComponent<Animator>();
+        isOpen = isOpenAtStart;
+        //animator.SetTrigger("TrOpen");
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void TriggerDoor()
     {
-        if (other.CompareTag("Player"))
+        // isOpen = !isOpen;
+        // animator.SetTrigger("TrOpen");
+        if (isOpen)
         {
-            Debug.Log("Can press E");
-            if (this.gameObject.name == "Button1")
-                buttonPress_1 = true;
-            if(this.gameObject.name=="Button2")
-            buttonPress_2 = true;
+            animator.SetTrigger("TrClose");
+            isOpen=false;
+        }else if(!isOpen)
+        {
+            animator.SetTrigger("TrOpen");
+            isOpen=true;    
         }
-    }
-    void OnTriggerExit(Collider other)
-    {
-        buttonPress_1 = false;
-        buttonPress_2=false;   
     }
 }
