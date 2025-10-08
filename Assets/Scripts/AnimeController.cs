@@ -35,7 +35,7 @@ public class AnimeController : MonoBehaviour
             anime.SetBool("Idle",true);
         }
     }
-    public void Jump(){
+    public void JumpPlay(){
         anime.SetBool("Grounded",false);
     }
     public void OnGround(){

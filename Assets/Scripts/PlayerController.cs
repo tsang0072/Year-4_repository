@@ -26,16 +26,15 @@ public class PlayerController : MonoBehaviour
     quaternion flipR=Quaternion.Euler(0,0,0);
 
     public float rayLength;
-
     Rigidbody rb;
     
-    
+    AnimeController animeController;
 
     void Start() 
     {
         rb=GetComponent<Rigidbody>();
-    
-        
+        rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+        animeController = AnimeController.instance;
     }
     void Update() 
     {
@@ -69,7 +68,7 @@ public class PlayerController : MonoBehaviour
         if(Physics.Raycast(grdChecker.position, Vector3.down, out hit, rayLength, ground))
         {
             isGrounded=true;
-        
+            animeController.OnGround();
         }
         else 
         {
@@ -77,8 +76,11 @@ public class PlayerController : MonoBehaviour
             
         }
 
-        if(jumpInput)
-        Jump();
+        if (jumpInput)
+        {
+            Jump();
+            
+        }
 
     }
 
@@ -86,6 +88,6 @@ public class PlayerController : MonoBehaviour
     {
         rb.velocity=new Vector3(0f, jumpForce, 0f);
         jumpInput=false;
-  
+        animeController.JumpPlay();
     }
 }
