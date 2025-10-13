@@ -12,27 +12,32 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed;
     Vector2 moveInput;
-    //public float groundDist;
     public float jumpForce;
     [SerializeField]bool jumpInput;
     
     public LayerMask ground;
     public Transform grdChecker;
+    public Transform respawnPoint;
     [SerializeField]bool isGrounded;
 
     public bool flipped;
     public float flipSpeed;
     Quaternion flipL=Quaternion.Euler(0,180,0);
-    quaternion flipR=Quaternion.Euler(0,0,0);
+    quaternion flipR = Quaternion.Euler(0, 0, 0);
+    public float respawnDelay = 1f;
 
     public float rayLength;
     Rigidbody rb;
+    //Renderer rend;
+    Collider col;
     
     AnimeController animeController;
 
     void Start() 
     {
-        rb=GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
+        //rend = GetComponent<Renderer>();
+        col = GetComponent<Collider>();
         rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
         animeController = AnimeController.instance;
     }
@@ -63,31 +68,55 @@ public class PlayerController : MonoBehaviour
     }
     void FixedUpdate()
     {
-        rb.velocity=new Vector3(moveInput.x*moveSpeed, rb.velocity.y, moveInput.y*moveSpeed);   
+        rb.velocity = new Vector3(moveInput.x * moveSpeed, rb.velocity.y, moveInput.y * moveSpeed);
         RaycastHit hit;
-        if(Physics.Raycast(grdChecker.position, Vector3.down, out hit, rayLength, ground))
+        if (Physics.Raycast(grdChecker.position, Vector3.down, out hit, rayLength, ground))
         {
-            isGrounded=true;
+            isGrounded = true;
             animeController.OnGround();
         }
-        else 
+        else
         {
-            isGrounded=false;
-            
+            isGrounded = false;
+
         }
 
         if (jumpInput)
         {
             Jump();
-            
+
         }
 
+    }
+    public void Die()
+    {
+        Debug.Log("Player hit by laser!");
+        StartCoroutine(Respawn());
     }
 
     void Jump()
     {
-        rb.velocity=new Vector3(0f, jumpForce, 0f);
-        jumpInput=false;
+        rb.velocity = new Vector3(0f, jumpForce, 0f);
+        jumpInput = false;
         animeController.JumpPlay();
+    }
+    
+    private System.Collections.IEnumerator Respawn()
+    {
+        // Optional: temporary "death" effect
+        //rend.enabled = false;
+        col.enabled = false;
+        rb.velocity = Vector3.zero;
+
+        yield return new WaitForSeconds(respawnDelay);
+
+        transform.position = respawnPoint.position;
+        transform.rotation = respawnPoint.rotation;
+        rb.velocity = Vector3.zero;
+
+        //rend.enabled = true;
+        col.enabled = true;
+
+        Debug.Log("Player respawned!");
     }
 }

@@ -8,6 +8,13 @@ public class Level2Puzzel : MonoBehaviour
     public List<DoorController> controlledDoors = new List<DoorController>();
     private bool isPressed = false;
 
+    Animator bottunController;
+
+    void Start()
+    {
+        bottunController = GetComponent<Animator>();
+    }
+
     void Update()
     {
         if (isPressed && (Input.GetKeyDown(KeyCode.E))){
@@ -17,7 +24,7 @@ public class Level2Puzzel : MonoBehaviour
     } 
     private void PressButton()
     {
-
+        bottunController.SetTrigger("TrPress");
         foreach (var door in controlledDoors)
         {
             door.TriggerDoor();

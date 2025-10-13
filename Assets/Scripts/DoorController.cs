@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class DoorController : MonoBehaviour
 {
-     public enum DoorType { OpenLeft, OpenRight }
+    public enum DoorType { OpenLeft, OpenRight }
     public DoorType doorType;
 
-    public bool isOpenAtStart = false;
+    public bool isOpenAtStart;
     private bool isOpen;
     private Animator animator;
+
 
     void Start()
     {
         animator = GetComponent<Animator>();
         isOpen = isOpenAtStart;
+        ResetDoor();
         //animator.SetTrigger("TrOpen");
     }
 
@@ -25,11 +27,19 @@ public class DoorController : MonoBehaviour
         if (isOpen)
         {
             animator.SetTrigger("TrClose");
-            isOpen=false;
-        }else if(!isOpen)
+            isOpen = false;
+        }
+        else if (!isOpen)
         {
             animator.SetTrigger("TrOpen");
-            isOpen=true;    
+            isOpen = true;
+        }
+    }
+    public void ResetDoor()
+    {
+        if (isOpen != isOpenAtStart)
+        {
+            TriggerDoor();
         }
     }
 }

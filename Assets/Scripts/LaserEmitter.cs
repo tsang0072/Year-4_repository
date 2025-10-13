@@ -13,8 +13,9 @@ public class LaserEmitter : MonoBehaviour
 
     [Header("Damage Settings")]
     public bool lethalToPlayer = true;
-
     private LineRenderer lr;
+
+    GameManager gameManager;
 
     void Start()
     {
@@ -24,6 +25,8 @@ public class LaserEmitter : MonoBehaviour
         lr.endWidth = lineWidth;
         lr.material = new Material(Shader.Find("Unlit/Color"));
         lr.material.color = laserColor;
+
+        gameManager=GameManager.instance;
 
         if (laserOrigin == null)
             laserOrigin = transform;
@@ -36,7 +39,7 @@ public class LaserEmitter : MonoBehaviour
 
     void EmitLaser()
     {
-         Vector3 origin = laserOrigin.position;
+        Vector3 origin = laserOrigin.position;
         Vector3 direction = laserOrigin.forward;
 
         Ray ray = new Ray(origin, direction);
@@ -51,7 +54,8 @@ public class LaserEmitter : MonoBehaviour
             if (lethalToPlayer && hit.collider.CompareTag("Player"))
             {
                 Debug.Log("Player hit by laser!");
-                // hit.collider.GetComponent<PlayerDeath>()?.Die();
+                hit.collider.GetComponent<PlayerController>()?.Die();
+                gameManager.PlayerDie();
             }
         }
         else
@@ -62,4 +66,5 @@ public class LaserEmitter : MonoBehaviour
         lr.SetPosition(0, origin);
         lr.SetPosition(1, endPosition);
     }
+    
 }
