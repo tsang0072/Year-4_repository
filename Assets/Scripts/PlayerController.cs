@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed;
     Vector2 moveInput;
     public float jumpForce;
+    public float gravityMultiplier;
     [SerializeField]bool jumpInput;
     
     public LayerMask ground;
@@ -68,12 +69,13 @@ public class PlayerController : MonoBehaviour
     }
     void FixedUpdate()
     {
+        rb.AddForce(Physics.gravity * gravityMultiplier, ForceMode.Acceleration);
         rb.velocity = new Vector3(moveInput.x * moveSpeed, rb.velocity.y, moveInput.y * moveSpeed);
         RaycastHit hit;
         if (Physics.Raycast(grdChecker.position, Vector3.down, out hit, rayLength, ground))
         {
-            isGrounded = true;
             animeController.OnGround();
+            isGrounded = true;
         }
         else
         {
