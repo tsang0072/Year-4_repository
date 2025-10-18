@@ -29,7 +29,6 @@ public class PlayerController : MonoBehaviour
 
     public float rayLength;
     Rigidbody rb;
-    //Renderer rend;
     Collider col;
     
     AnimeController animeController;
@@ -92,7 +91,7 @@ public class PlayerController : MonoBehaviour
     }
     public void Die()
     {
-        Debug.Log("Player hit by laser!");
+        Debug.Log("Player hit by laser");
         StartCoroutine(Respawn());
     }
 
@@ -105,8 +104,6 @@ public class PlayerController : MonoBehaviour
     
     private System.Collections.IEnumerator Respawn()
     {
-        // Optional: temporary "death" effect
-        //rend.enabled = false;
         col.enabled = false;
         rb.velocity = Vector3.zero;
 
@@ -116,9 +113,8 @@ public class PlayerController : MonoBehaviour
         transform.rotation = respawnPoint.rotation;
         rb.velocity = Vector3.zero;
 
-        //rend.enabled = true;
         col.enabled = true;
 
-        Debug.Log("Player respawned!");
+        Debug.Log("Player reborned");
     }
 }
