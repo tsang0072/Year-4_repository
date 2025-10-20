@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
     }
     public void Die()
     {
-        Debug.Log("Player hit by laser");
+        Debug.Log("Player died");
         StartCoroutine(Respawn());
     }
 

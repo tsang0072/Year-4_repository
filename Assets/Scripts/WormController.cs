@@ -13,30 +13,27 @@ public class WormController : MonoBehaviour
         gameManager=GameManager.instance;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (isOut)
-        {
-            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>()?.Die();
-            gameManager.PlayerDie();
-        }
-
-    }
+  
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             Debug.Log("worm out");
             wormAnimator.SetTrigger("isOut");
-            isOut=true;
+            isOut = true;
 
             other.GetComponent<PlayerController>()?.Die();
             gameManager.PlayerDie();
         }
     }
-    IEnumerator HoldSeconds()
-    {
-        yield return new WaitForSeconds(20);
+    private void OnTriggerExit(Collider other) {
+        if (other.CompareTag("Player"))
+        {
+            isOut = false;
+        }
     }
+    // IEnumerator HoldSeconds()
+    // {
+    //     yield return new WaitForSeconds(20);
+    // }
 }
