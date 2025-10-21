@@ -38,7 +38,12 @@ public class AnimeController : MonoBehaviour
     public void JumpPlay(){
         anime.SetBool("Grounded",false);
     }
-    public void OnGround(){
-        anime.SetBool("Grounded",true);
+    public void OnGround()
+    {
+        anime.SetBool("Grounded", true);
+    }
+    public void DiePlay()
+    {
+        anime.SetTrigger("TrDie");
     }
 }

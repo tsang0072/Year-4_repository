@@ -18,14 +18,16 @@ public class PlayerController : MonoBehaviour
     
     public LayerMask ground;
     public Transform grdChecker;
-    public Transform respawnPoint;
     [SerializeField]bool isGrounded;
 
     public bool flipped;
     public float flipSpeed;
     Quaternion flipL=Quaternion.Euler(0,180,0);
     quaternion flipR = Quaternion.Euler(0, 0, 0);
-    public float respawnDelay = 1f;
+    public float respawnDelay = 2f;
+
+    int levelNum = 0;
+    [SerializeField] GameObject[] spawnPoints;
 
     public float rayLength;
     Rigidbody rb;
@@ -91,6 +93,7 @@ public class PlayerController : MonoBehaviour
     }
     public void Die()
     {
+        animeController.DiePlay();
         Debug.Log("Player died");
         StartCoroutine(Respawn());
     }
@@ -101,20 +104,34 @@ public class PlayerController : MonoBehaviour
         jumpInput = false;
         animeController.JumpPlay();
     }
-    
-    private System.Collections.IEnumerator Respawn()
+
+    private IEnumerator Respawn()
     {
-        col.enabled = false;
+        //col.enabled = false;
         rb.velocity = Vector3.zero;
 
         yield return new WaitForSeconds(respawnDelay);
 
-        transform.position = respawnPoint.position;
-        transform.rotation = respawnPoint.rotation;
+        transform.position = spawnPoints[levelNum].transform.position;
+        transform.rotation = spawnPoints[levelNum].transform.rotation;
         rb.velocity = Vector3.zero;
 
-        col.enabled = true;
+        //col.enabled = true;
 
         Debug.Log("Player reborned");
+    }
+    private void OnTriggerEnter(Collider other) {
+        if (other.gameObject.name == "Leve2_checker")
+        {
+            levelNum = 0;
+            Debug.Log("Level 2 in");
+
+
+        }
+        else if (other.gameObject.name == "Leve3_checker")
+        {
+            levelNum = 1;
+            Debug.Log("Level 3 in");
+        }    
     }
 }
