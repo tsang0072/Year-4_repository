@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     public float flipSpeed;
     Quaternion flipL=Quaternion.Euler(0,180,0);
     quaternion flipR = Quaternion.Euler(0, 0, 0);
-    public float respawnDelay = 2f;
+    public float respawnDelay = 4f;
 
     int levelNum = 0;
     [SerializeField] GameObject[] spawnPoints;
