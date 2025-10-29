@@ -1,9 +1,85 @@
-using TMPro;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
-using System;
+using Unity.VisualScripting;
 
 public class DialogueManager : MonoBehaviour
 {
+    public GameObject spiderText;
+    public GameObject overTalkSpider;
+    public GameObject overTalkRat;
+    public GameObject ratText;
+    bool isSpider = false;
+    bool isRat = false;
+    int SpiderCount = 0;
+    int RatCount = 0;
+
+    void Start()
+    {
+        spiderText.SetActive(false);
+        ratText.SetActive(false);
+        overTalkRat.SetActive(false);
+        overTalkSpider.SetActive(false);
+
+    }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (isSpider)
+            {
+                SpiderCount++;
+                if (SpiderCount <= 3)
+                {
+                    spiderText.SetActive(true);
+                    Debug.Log(SpiderCount);
+                    StartCoroutine(TextOut(spiderText));
+                }
+                else if (SpiderCount > 3)
+                {
+                    overTalkSpider.SetActive(true);
+                    StartCoroutine(TextOut(overTalkSpider));
+                }
+                
+                
+            }else if (isRat)
+            {
+                RatCount++;
+                if (RatCount <= 3)
+                {
+                    ratText.SetActive(true);
+                    Debug.Log("talking to rat");
+                    StartCoroutine(TextOut(ratText));
+                }else if (RatCount > 3)
+                {
+                    overTalkRat.SetActive(true);
+                    StartCoroutine(TextOut(overTalkRat));
+                }
+            }
+        }
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        if (this.gameObject.name == "Spider")
+        {
+            isSpider = true;
+        }
+        if (this.gameObject.name == "Rat")
+        {
+            isRat = true;
+        }
+    }
+    void OnTriggerExit(Collider other)
+    {
+        isSpider = false;
+        isRat=false;
+    }
     
+    IEnumerator TextOut(GameObject gameObject)
+    {
+        yield return new WaitForSeconds(3);
+        gameObject.SetActive(false);
+    }
 }
