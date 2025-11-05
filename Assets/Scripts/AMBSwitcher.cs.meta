@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 32a7307431eb1cd45b75758683728d20
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - pauseClip: {fileID: 8300000, guid: ca043542f9edb3a4d938aef2acc6ae1f, type: 3}
+  - playClip: {fileID: 8300000, guid: bafcd34e7a346904989b76b05b49fb7e, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

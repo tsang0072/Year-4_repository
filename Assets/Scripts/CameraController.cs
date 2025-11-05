@@ -22,6 +22,8 @@ public class CameraController : MonoBehaviour
         {
             roomCam.Priority = 20;   // take control
             followCam.Priority = 10; 
+
+            
         }
     }
 

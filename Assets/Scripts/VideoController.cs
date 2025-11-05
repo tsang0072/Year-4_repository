@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class VideoController : MonoBehaviour
 {
     VideoPlayer video;
+    public int sceneNum;
     void Awake()
     {
         video = GetComponent<VideoPlayer>();
@@ -19,7 +20,7 @@ public class VideoController : MonoBehaviour
 
      void CheckOver(UnityEngine.Video.VideoPlayer vp)
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(sceneNum);
     }
 
 }
