@@ -9,16 +9,20 @@ public class Level2Puzzel : MonoBehaviour
     private bool isPressed = false;
 
     Animator bottunController;
+    AudioManager audioManager;
 
     void Start()
     {
         bottunController = GetComponent<Animator>();
+        audioManager=AudioManager.instance;
     }
 
     void Update()
     {
         if (isPressed && (Input.GetKeyDown(KeyCode.E))){
             PressButton();
+            audioManager.PlayButtonSFX();
+            audioManager.PlayDoorSFX();
             Debug.Log("Level2 pressed");
         }
     } 
@@ -29,7 +33,6 @@ public class Level2Puzzel : MonoBehaviour
         {
             door.TriggerDoor();
         }
-        // Optional: Play button press animation or sound
     }
     private void OnTriggerEnter(Collider other)
     {

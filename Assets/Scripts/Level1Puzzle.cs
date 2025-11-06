@@ -5,6 +5,7 @@ using UnityEngine;
 public class Level1Puzzle : MonoBehaviour
 {
     Animator bottunController;
+    AudioManager audioManager;
     bool buttonPress_1 = false;
     bool buttonPress_2 = false;
     bool door1Open=false;
@@ -13,11 +14,14 @@ public class Level1Puzzle : MonoBehaviour
     void Start()
     {
         bottunController = GetComponent<Animator>();
+        audioManager=AudioManager.instance;
     }
     void Update()
     {
         if (buttonPress_1 && Input.GetKeyDown(KeyCode.E))
         {
+            audioManager.PlayButtonSFX();
+            audioManager.PlayDoorSFX();
             bottunController.SetTrigger("TrPress");
             if (!door1Open)
             {
@@ -43,6 +47,7 @@ public class Level1Puzzle : MonoBehaviour
         if (buttonPress_2 && Input.GetKeyDown(KeyCode.E))
         {
             bottunController.SetTrigger("TrPress");
+            audioManager.PlayDoorSFX();
             if (door2Open)
             {
                 Debug.Log("door2"+door2Open);

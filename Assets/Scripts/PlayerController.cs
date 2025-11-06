@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     public float flipSpeed;
     Quaternion flipL=Quaternion.Euler(0,180,0);
     quaternion flipR = Quaternion.Euler(0, 0, 0);
-    public float respawnDelay = 4f;
+    public float respawnDelay = 8f;
 
     int levelNum = 0;
     [SerializeField] GameObject[] spawnPoints;
@@ -32,6 +32,9 @@ public class PlayerController : MonoBehaviour
     public float rayLength;
     Rigidbody rb;
     Collider col;
+
+    public AudioSource audioSource;
+    bool IsMoving;
     
     AnimeController animeController;
 
@@ -40,13 +43,31 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         //rend = GetComponent<Renderer>();
         col = GetComponent<Collider>();
+        audioSource=GetComponent<AudioSource>();
         rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
         animeController = AnimeController.instance;
     }
     void Update() 
     {
        moveInput.x=Input.GetAxis("Horizontal");
-       moveInput.y=Input.GetAxis("Vertical");
+        moveInput.y = Input.GetAxis("Vertical");
+
+        if (moveInput.x != 0)
+        {
+            IsMoving = true;
+            Debug.Log("Walking");
+        }
+        else
+        {
+            IsMoving = false;
+        }
+        if (IsMoving && !audioSource.isPlaying&&isGrounded)
+        {
+            audioSource.Play(); 
+        }else if (!IsMoving||!isGrounded)
+        {
+            audioSource.Stop();
+        }
 
        if(Input.GetKeyDown(KeyCode.Space)&&isGrounded)
        jumpInput=true;
@@ -58,13 +79,14 @@ public class PlayerController : MonoBehaviour
        {
             flipped=false;
        }
-       if(flipped)
-       {
-            transform.rotation=Quaternion.Slerp(transform.rotation, flipL, flipSpeed*Time.deltaTime);
-       }else if(!flipped)
-       {
-            transform.rotation=Quaternion.Slerp(transform.rotation, flipR, flipSpeed*Time.deltaTime);
-       }
+        if (flipped)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, flipL, flipSpeed * Time.deltaTime);
+        }
+        else if (!flipped)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, flipR, flipSpeed * Time.deltaTime);
+        }
 
  
     }
@@ -73,6 +95,7 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(Physics.gravity * gravityMultiplier, ForceMode.Acceleration);
         rb.velocity = new Vector3(moveInput.x * moveSpeed, rb.velocity.y, moveInput.y * moveSpeed);
         RaycastHit hit;
+
         if (Physics.Raycast(grdChecker.position, Vector3.down, out hit, rayLength, ground))
         {
             animeController.OnGround();
@@ -110,7 +133,7 @@ public class PlayerController : MonoBehaviour
         //col.enabled = false;
         rb.velocity = Vector3.zero;
 
-        yield return new WaitForSeconds(respawnDelay);
+        yield return new WaitForSeconds(2);
 
         transform.position = spawnPoints[levelNum].transform.position;
         transform.rotation = spawnPoints[levelNum].transform.rotation;
@@ -121,14 +144,14 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Player reborned");
     }
     private void OnTriggerEnter(Collider other) {
-        if (other.gameObject.name == "Leve2_checker")
+        if (other.gameObject.name == "Leve2_enter")
         {
             levelNum = 0;
             Debug.Log("Level 2 in");
 
 
         }
-        else if (other.gameObject.name == "Leve3_checker")
+        else if (other.gameObject.name == "Leve3_enter")
         {
             levelNum = 1;
             Debug.Log("Level 3 in");
