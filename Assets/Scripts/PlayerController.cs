@@ -155,6 +155,10 @@ public class PlayerController : MonoBehaviour
         {
             levelNum = 1;
             Debug.Log("Level 3 in");
-        }    
+        }else if (other.gameObject.name == "Leve4_enter")
+        {
+            levelNum = 2;
+            Debug.Log("Level 4 in");
+        }     
     }
 }
