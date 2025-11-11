@@ -11,8 +11,10 @@ public class DialogueManager : MonoBehaviour
     public GameObject overTalkSpider;
     public GameObject overTalkRat;
     public GameObject ratText;
+    public GameObject mosquitoText;
     bool isSpider = false;
     bool isRat = false;
+    bool isMosquito = false;
     int SpiderCount = 0;
     int RatCount = 0;
 
@@ -20,9 +22,10 @@ public class DialogueManager : MonoBehaviour
     {
         spiderText.SetActive(false);
         ratText.SetActive(false);
+        mosquitoText.SetActive(false);
         overTalkRat.SetActive(false);
         overTalkSpider.SetActive(false);
-
+      
     }
     void Update()
     {
@@ -57,6 +60,10 @@ public class DialogueManager : MonoBehaviour
                     overTalkRat.SetActive(true);
                     StartCoroutine(TextOut(overTalkRat));
                 }
+            }else if (isMosquito)
+            {
+                mosquitoText.SetActive(true);
+                StartCoroutine(TextOut(mosquitoText));
             }
         }
     }
@@ -70,11 +77,16 @@ public class DialogueManager : MonoBehaviour
         {
             isRat = true;
         }
+        if (this.gameObject.name == "mosquitos")
+        {
+            isMosquito = true;
+        }
     }
     void OnTriggerExit(Collider other)
     {
         isSpider = false;
-        isRat=false;
+        isRat = false;
+        isMosquito=false;
     }
     
     IEnumerator TextOut(GameObject gameObject)
