@@ -139,9 +139,10 @@ public class PlayerController : MonoBehaviour
         transform.rotation = spawnPoints[levelNum].transform.rotation;
         rb.velocity = Vector3.zero;
 
+        yield return new WaitForSeconds(2);
+        
         //col.enabled = true;
 
-        Debug.Log("Player reborned");
     }
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.name == "Leve2_enter")

@@ -17,4 +17,8 @@ public class AMBSwitcher : MonoBehaviour
         audioManager.PauseAMB(pauseClip);
         audioManager.PlayAMB(playClip);
     }
+    void OnTriggerExit(Collider other)
+    {
+        Destroy(this.gameObject);
+    }
 }

@@ -28,6 +28,7 @@ public class WormController : MonoBehaviour
 
             other.GetComponent<PlayerController>()?.Die();
             gameManager.PlayerDie();
+            //audioManager.PlayDoorSFX();
         }
     }
     private void OnTriggerExit(Collider other) {
