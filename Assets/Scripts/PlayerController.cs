@@ -128,6 +128,11 @@ public class PlayerController : MonoBehaviour
         animeController.JumpPlay();
     }
 
+    public void FreezePlayer()
+    {
+        StartCoroutine(PauseMovement());
+    }
+
     private IEnumerator Respawn()
     {
         //col.enabled = false;
@@ -149,17 +154,39 @@ public class PlayerController : MonoBehaviour
         {
             levelNum = 0;
             Debug.Log("Level 2 in");
-
+            FreezePlayer();
 
         }
         else if (other.gameObject.name == "Leve3_enter")
         {
             levelNum = 1;
             Debug.Log("Level 3 in");
+            FreezePlayer();
         }else if (other.gameObject.name == "Leve4_enter")
         {
             levelNum = 2;
             Debug.Log("Level 4 in");
+            FreezePlayer();
         }     
     }
+
+
+    IEnumerator PauseMovement() {
+    //Backup and clear velocities
+    Vector3 linearBackup = rb.velocity;
+    Vector3 angularBackup = rb.angularVelocity;
+    rb.velocity = Vector3.zero;
+    rb.angularVelocity = Vector3.zero;
+
+    //Finally freeze the body in place so forces like gravity or movement won't affect it
+    //rb.constraints = RigidbodyConstraints.FreezeAll;
+
+    //Wait for a bit (two seconds)
+    yield return new WaitForSeconds(2);
+    //And unfreeze before restoring velocities
+    //rb.constraints = RigidbodyConstraints.None;
+    //restore the velocities
+    rb.velocity = linearBackup;
+    rb.angularVelocity = angularBackup;
+}
 }

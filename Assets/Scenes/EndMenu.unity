@@ -751,7 +751,7 @@ GameObject:
   - component: {fileID: 736942276}
   - component: {fileID: 736942275}
   m_Layer: 5
-  m_Name: BackButton (1)
+  m_Name: ExitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -911,7 +911,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 36b01b4d920573d47988ebd555637f92, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -1118,10 +1118,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1605192897}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 5, y: 18}
-  m_SizeDelta: {x: 3800, y: 2000}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1102141406
 MonoBehaviour:
@@ -1672,7 +1672,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 917828645}
         m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
-        m_MethodName: ChangeScene
+        m_MethodName: SiwtchScene
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -7,6 +7,9 @@ using UnityEngine.UI;
 public class SceneController : MonoBehaviour
 {
     public static SceneController instance;
+    //public Image fadeImage;
+
+    Scenefade scenefade;
 
     void Awake() {
         if(!instance){
@@ -15,6 +18,9 @@ public class SceneController : MonoBehaviour
             Destroy(gameObject);
         }
         DontDestroyOnLoad(gameObject);
+    }
+    private void Start() {
+        scenefade=GetComponentInChildren<Scenefade>();
     }
     
     public void SiwtchScene(string scenename)
@@ -25,10 +31,29 @@ public class SceneController : MonoBehaviour
 
     public void ChangeScene(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        StartCoroutine(LoadSceneCoroutine(sceneName));
     }
     public void QuitGame()
     {
         Application.Quit();
     }
+
+    public void Fade()
+    {
+        StartCoroutine(FadeCoroutine());
+    }
+
+    public IEnumerator LoadSceneCoroutine(string sceneName)
+    {
+        yield return SceneManager.LoadSceneAsync(sceneName);
+        yield return scenefade.FadeInCoroutine(2);
+    }
+
+    public IEnumerator FadeCoroutine()
+    {
+        yield return scenefade.FadeOutCoroutine(2);
+        yield return scenefade.FadeInCoroutine(2);
+    }
+
+
 }

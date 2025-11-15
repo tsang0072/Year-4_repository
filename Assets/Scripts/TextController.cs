@@ -16,6 +16,7 @@ public class TextController : MonoBehaviour
         text1.enabled=false;
         text2.enabled=false;
         text3.enabled=false;
+        
     }
     
     void Update()
@@ -42,6 +43,7 @@ public class TextController : MonoBehaviour
         }else if (this.gameObject.name == "trigger3")
         {
             text3.enabled=true;
+        }else if(this.gameObject.name == "trigge3"){
         }
 
     }

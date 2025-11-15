@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         allDoors = FindObjectsOfType<DoorController>();    
-        sceneController = GetComponent<SceneController>();
+        sceneController = SceneController.instance;
     }
 
     public void PlayerDie()
@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
         {
             door.ResetDoor();
         }
-
+        sceneController.Fade();
     }
     
     // public void Ending()

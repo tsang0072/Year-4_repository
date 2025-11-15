@@ -7,20 +7,23 @@ using UnityEngine.SceneManagement;
 public class VideoController : MonoBehaviour
 {
     VideoPlayer video;
-    public int sceneNum;
+    public string sceneName;
+    SceneController sceneController;
+   
     void Awake()
     {
         video = GetComponent<VideoPlayer>();
         video.Play();
         video.loopPointReached += CheckOver;
-
+        sceneController=SceneController.instance;
 
     }
 
 
      void CheckOver(UnityEngine.Video.VideoPlayer vp)
     {
-        SceneManager.LoadScene(sceneNum);
+        sceneController.ChangeScene(sceneName);
+        //SceneManager.LoadScene(sceneName);
     }
 
 }

@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97c86a74abcbc464aa35e8270b57e7bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneNum: 2
+  sceneName: InGame
 --- !u!328 &607999158
 VideoPlayer:
   m_ObjectHideFlags: 0

@@ -18,6 +18,8 @@ public class DialogueManager : MonoBehaviour
     int SpiderCount = 0;
     int RatCount = 0;
 
+    public TextMeshProUGUI dialogueNote;
+
     void Start()
     {
         spiderText.SetActive(false);
@@ -25,6 +27,8 @@ public class DialogueManager : MonoBehaviour
         mosquitoText.SetActive(false);
         overTalkRat.SetActive(false);
         overTalkSpider.SetActive(false);
+
+        dialogueNote.enabled=false;
       
     }
     void Update()
@@ -69,6 +73,7 @@ public class DialogueManager : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
+        dialogueNote.enabled=true;
         if (this.gameObject.name == "Spider")
         {
             isSpider = true;
@@ -87,6 +92,8 @@ public class DialogueManager : MonoBehaviour
         isSpider = false;
         isRat = false;
         isMosquito=false;
+
+        dialogueNote.enabled=false;
     }
     
     IEnumerator TextOut(GameObject gameObject)
