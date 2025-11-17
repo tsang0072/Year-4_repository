@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     private DoorController[] allDoors;
-    bool isDied = false;
+    //bool isDied = false;
     
     
     SceneController sceneController;
@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
 
     public void PlayerDie()
     {
-        isDied = true;
+        //isDied = true;
         Debug.Log("Player restart");
         foreach (DoorController door in allDoors)
         {
@@ -38,9 +38,15 @@ public class GameManager : MonoBehaviour
         }
         sceneController.Fade();
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+    public void SiwtchScene(string scenename)
+    {
+        Debug.Log("sceneName to load: " + scenename);
+        SceneManager.LoadScene(scenename);
+    }
     
-    // public void Ending()
-    // {
-    //     SceneManager.LoadScene(3);
-    // }
 }

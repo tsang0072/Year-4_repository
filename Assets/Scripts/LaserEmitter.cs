@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LaserEmitter : MonoBehaviour
@@ -16,6 +17,7 @@ public class LaserEmitter : MonoBehaviour
     private LineRenderer lr;
 
     GameManager gameManager;
+    public GameObject player;
 
     void Start()
     {
@@ -32,7 +34,7 @@ public class LaserEmitter : MonoBehaviour
             laserOrigin = transform;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         EmitLaser();
     }
@@ -47,6 +49,8 @@ public class LaserEmitter : MonoBehaviour
 
         Vector3 endPosition;
 
+        
+
         if (Physics.Raycast(ray, out hit, laserLength, hitLayers))
         {
             endPosition = hit.point;
@@ -54,8 +58,10 @@ public class LaserEmitter : MonoBehaviour
             if (lethalToPlayer && hit.collider.CompareTag("Player"))
             {
                 Debug.Log("Player hit by laser!");
-                hit.collider.GetComponent<PlayerController>()?.Die();
+                //hit.collider.GetComponent<PlayerController>()?.Die();
+                player.GetComponent<PlayerController>()?.Die();
                 gameManager.PlayerDie();
+                
             }
         }
         else

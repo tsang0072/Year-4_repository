@@ -10,24 +10,18 @@ public class DoorController : MonoBehaviour
     public bool isOpenAtStart;
     private bool isOpen;
     private Animator animator;
-    AudioManager audioManager;
     
 
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        audioManager=AudioManager.instance;
         isOpen = isOpenAtStart;
         ResetDoor();
-
-        //animator.SetTrigger("TrOpen");
     }
 
     public void TriggerDoor()
     {
-        // isOpen = !isOpen;
-        // animator.SetTrigger("TrOpen");
         if (isOpen)
         {
             animator.SetTrigger("TrClose");

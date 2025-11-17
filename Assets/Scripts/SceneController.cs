@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -7,6 +8,9 @@ using UnityEngine.UI;
 public class SceneController : MonoBehaviour
 {
     public static SceneController instance;
+    string sceneName;
+    public GameObject pauseMenu;
+    
     //public Image fadeImage;
 
     Scenefade scenefade;
@@ -19,8 +23,28 @@ public class SceneController : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
     }
-    private void Start() {
+    private void Start() 
+    {
         scenefade=GetComponentInChildren<Scenefade>();
+        
+    }
+        
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape)){
+            Scene currentScene = SceneManager.GetActiveScene ();
+		    sceneName = currentScene.name;
+            if (sceneName == "InGame")
+            {
+                pauseMenu.SetActive(true);
+                Time.timeScale=0;
+            }
+        }
+    }
+    public void BackToGame()
+    {
+        pauseMenu.SetActive(false);
+        Time.timeScale=1;
     }
     
     public void SiwtchScene(string scenename)
@@ -42,6 +66,10 @@ public class SceneController : MonoBehaviour
     {
         StartCoroutine(FadeCoroutine());
     }
+    public void LevelFade()
+    {
+        StartCoroutine(FadeCoroutine());
+    }
 
     public IEnumerator LoadSceneCoroutine(string sceneName)
     {
@@ -53,6 +81,14 @@ public class SceneController : MonoBehaviour
     {
         yield return scenefade.FadeOutCoroutine(2);
         yield return scenefade.FadeInCoroutine(2);
+    }
+
+    public IEnumerator LevelFadeCoroutine()
+    {
+        yield return scenefade.FadeOutCoroutine(1);
+        //yield return scenefade.FadeInCoroutine(2);
+        //playerController.Isfreezed=false;
+        //player.gameObject.GetComponent<PlayerController>().enabled=false;
     }
 
 
