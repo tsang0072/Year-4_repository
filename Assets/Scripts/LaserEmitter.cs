@@ -17,8 +17,11 @@ public class LaserEmitter : MonoBehaviour
     private LineRenderer lr;
 
     GameManager gameManager;
-    public GameObject player;
 
+    // void Awake()
+    // {
+    //     gameManager = GameManager.instance;
+    // }
     void Start()
     {
         lr = GetComponent<LineRenderer>();
@@ -27,8 +30,6 @@ public class LaserEmitter : MonoBehaviour
         lr.endWidth = lineWidth;
         lr.material = new Material(Shader.Find("Unlit/Color"));
         lr.material.color = laserColor;
-
-        gameManager=GameManager.instance;
 
         if (laserOrigin == null)
             laserOrigin = transform;
@@ -49,17 +50,16 @@ public class LaserEmitter : MonoBehaviour
 
         Vector3 endPosition;
 
-        
-
         if (Physics.Raycast(ray, out hit, laserLength, hitLayers))
         {
             endPosition = hit.point;
+            CapsuleCollider cc = hit.collider as CapsuleCollider;
+            gameManager = GameManager.instance;
 
-            if (lethalToPlayer && hit.collider.CompareTag("Player"))
+            if (cc!=null&& cc.CompareTag("Player"))
             {
                 Debug.Log("Player hit by laser!");
-                //hit.collider.GetComponent<PlayerController>()?.Die();
-                player.GetComponent<PlayerController>()?.Die();
+                cc.GetComponent<PlayerController>()?.Die();
                 gameManager.PlayerDie();
                 
             }

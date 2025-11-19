@@ -85,8 +85,8 @@ public class SceneController : MonoBehaviour
 
     public IEnumerator LevelFadeCoroutine()
     {
-        yield return scenefade.FadeOutCoroutine(1);
-        //yield return scenefade.FadeInCoroutine(2);
+        //yield return scenefade.FadeOutCoroutine(1);
+        yield return scenefade.FadeInCoroutine(1);
         //playerController.Isfreezed=false;
         //player.gameObject.GetComponent<PlayerController>().enabled=false;
     }

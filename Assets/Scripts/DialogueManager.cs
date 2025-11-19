@@ -38,13 +38,13 @@ public class DialogueManager : MonoBehaviour
             if (isSpider)
             {
                 SpiderCount++;
-                if (SpiderCount <= 3)
+                if (SpiderCount <= 2)
                 {
                     spiderText.SetActive(true);
                     Debug.Log(SpiderCount);
                     StartCoroutine(TextOut(spiderText));
                 }
-                else if (SpiderCount > 3)
+                else if (SpiderCount > 4)
                 {
                     overTalkSpider.SetActive(true);
                     StartCoroutine(TextOut(overTalkSpider));
@@ -54,12 +54,12 @@ public class DialogueManager : MonoBehaviour
             }else if (isRat)
             {
                 RatCount++;
-                if (RatCount <= 3)
+                if (RatCount <= 2)
                 {
                     ratText.SetActive(true);
                     Debug.Log("talking to rat");
                     StartCoroutine(TextOut(ratText));
-                }else if (RatCount > 3)
+                }else if (RatCount > 4)
                 {
                     overTalkRat.SetActive(true);
                     StartCoroutine(TextOut(overTalkRat));
