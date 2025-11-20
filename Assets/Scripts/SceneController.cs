@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -26,7 +25,6 @@ public class SceneController : MonoBehaviour
     private void Start() 
     {
         scenefade=GetComponentInChildren<Scenefade>();
-        
     }
         
     void Update()
@@ -57,10 +55,7 @@ public class SceneController : MonoBehaviour
     {
         StartCoroutine(LoadSceneCoroutine(sceneName));
     }
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
+    
 
     public void Fade()
     {

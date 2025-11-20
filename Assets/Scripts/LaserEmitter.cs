@@ -18,10 +18,7 @@ public class LaserEmitter : MonoBehaviour
 
     GameManager gameManager;
 
-    // void Awake()
-    // {
-    //     gameManager = GameManager.instance;
-    // }
+
     void Start()
     {
         lr = GetComponent<LineRenderer>();
