@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     private DoorController[] allDoors;
-    //bool isDied = false;
     
     
     SceneController sceneController;
@@ -43,7 +42,14 @@ public class GameManager : MonoBehaviour
     {
         Application.Quit();
     }
-    public void SiwtchScene(string scenename)
+    public void PauseGame()
+    {
+        Time.timeScale=0;
+    }
+    public void ContinueGame()
+    {
+        Time.timeScale=1;
+    }    public void SiwtchScene(string scenename)
     {
         Debug.Log("sceneName to load: " + scenename);
         SceneManager.LoadScene(scenename);
