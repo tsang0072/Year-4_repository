@@ -445,7 +445,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -442, y: 140}
+  m_AnchoredPosition: {x: -416, y: 33}
   m_SizeDelta: {x: 1300, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &449631549
@@ -492,17 +492,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Programming: Lifei Zeng
-
-    Audio: Lifei Zeng
-
-    Art&Assets: LifeiZeng
-
-
-    Special
-    Thanks:
-
-    Veliko Ivanov'
+  m_text: "Programming: Lifei Zeng\nAudio: Lifei Zeng\nArt&Assets: LifeiZeng\n\nSpecial
+    Thanks:\nFalse Knees \xA9  \u2022 Joshua Barkman\nVeliko Ivanov"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ec1e938c26b9447b0a02301c7200dcce, type: 2}
   m_sharedMaterial: {fileID: 5385277421075690621, guid: ec1e938c26b9447b0a02301c7200dcce, type: 2}
@@ -529,8 +520,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 70
-  m_fontSizeBase: 70
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

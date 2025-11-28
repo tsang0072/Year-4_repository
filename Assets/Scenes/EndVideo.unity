@@ -448,7 +448,7 @@ GameObject:
   - component: {fileID: 1512805584}
   - component: {fileID: 1512805586}
   m_Layer: 0
-  m_Name: EndingVideo_slow
+  m_Name: EndingVideo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -462,7 +462,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1512805583}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: d9547fde4e80188488e393a39ee8c284, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 686e667a8febca846ab46bcd01fbedbe, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 380796500}
@@ -474,7 +474,7 @@ VideoPlayer:
   m_AspectRatio: 2
   m_DataSource: 0
   m_TimeUpdateMode: 2
-  m_PlaybackSpeed: 1
+  m_PlaybackSpeed: 0.5
   m_AudioOutputMode: 2
   m_TargetAudioSources:
   - {fileID: 0}
