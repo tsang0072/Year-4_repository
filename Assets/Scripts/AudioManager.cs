@@ -1,16 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.Rendering;
 
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
 
-    // public AudioClip AMB_Level1;
-    // public AudioClip AMB_Level2;
-    // public AudioClip AMB_Level3;
     public AudioClip SFX_Button;
     public AudioClip SFX_Door;
     public AudioClip SFX_Sandworm;
@@ -42,16 +37,16 @@ public class AudioManager : MonoBehaviour
         SFXSource.Play();
 
     }
-    public void PauseAMB(AudioClip pauseClip)
+    public void PauseAMB(AudioSource audioSource)
     {
-        AMBSource.clip = pauseClip;
+        AMBSource = audioSource;
         AMBSource.Pause();
         
     }
     
-    public void PlayAMB(AudioClip playClip)
+    public void PlayAMB(AudioSource audioSource)
     {
-        AMBSource.clip = playClip;
+        AMBSource = audioSource;
         AMBSource.loop = true;
         AMBSource.Play();
     }

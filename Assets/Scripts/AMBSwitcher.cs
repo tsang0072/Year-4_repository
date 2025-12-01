@@ -6,16 +6,16 @@ using UnityEngine.Audio;
 public class AMBSwitcher : MonoBehaviour
 {
     AudioManager audioManager;
-    public AudioClip pauseClip;
-    public AudioClip playClip;
+    public AudioSource pauseAMB;
+    public AudioSource playAMB;
     void Start()
     {
         audioManager = AudioManager.instance;
     }
     void OnTriggerEnter(Collider other)
     {
-        audioManager.PauseAMB(pauseClip);
-        audioManager.PlayAMB(playClip);
+        audioManager.PauseAMB(pauseAMB);
+        audioManager.PlayAMB(playAMB);
     }
     void OnTriggerExit(Collider other)
     {
