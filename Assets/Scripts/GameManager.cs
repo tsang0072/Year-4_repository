@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     private DoorController[] allDoors;
+    public bool isDied=false;
+
     
     
     SceneController sceneController;
@@ -29,7 +31,7 @@ public class GameManager : MonoBehaviour
 
     public void PlayerDie()
     {
-        //isDied = true;
+        isDied = true;
         Debug.Log("Player restart");
         foreach (DoorController door in allDoors)
         {

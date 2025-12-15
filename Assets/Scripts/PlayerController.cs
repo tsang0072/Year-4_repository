@@ -109,12 +109,7 @@ public class PlayerController : MonoBehaviour
 
         }
     }
-    public void Die()
-    {
-        animeController.DiePlay();
-        Debug.Log("Player died");
-        StartCoroutine(Respawn());
-    }
+    
 
     void Jump()
     {
@@ -122,24 +117,22 @@ public class PlayerController : MonoBehaviour
         jumpInput = false;
         animeController.JumpPlay();
     }
-
+    public void Die()
+    {
+        animeController.DiePlay();
+        Debug.Log("Player died");
+        StartCoroutine(Respawn());
+    }
 
     private IEnumerator Respawn()
     {
-        //col.enabled = false;
         rb.velocity = Vector3.zero;
-
         yield return new WaitForSeconds(2);
 
         transform.position = spawnPoints[levelNum].transform.position;
         transform.rotation = spawnPoints[levelNum].transform.rotation;
-        rb.velocity = Vector3.zero;
-
-        yield return new WaitForSeconds(2);
-        
-        //col.enabled = true;
-
     }
+
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.name == "Leve2_enter")
         {

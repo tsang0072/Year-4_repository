@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Level2Puzzel : MonoBehaviour
+public class ButtonController : MonoBehaviour
 {
     [Header("Doors controlled by this button")]
     public List<DoorController> controlledDoors = new List<DoorController>();

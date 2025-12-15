@@ -29584,7 +29584,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Press E to trigger the doors along its row and colume.
+  m_text: 'Press E to trigger the doors along its row and column.
 
 '
   m_isRightToLeft: 0
@@ -74650,6 +74650,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebacb55a8b1806743af546ed7966701e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDied: 0
 --- !u!4 &1874955824
 Transform:
   m_ObjectHideFlags: 0
