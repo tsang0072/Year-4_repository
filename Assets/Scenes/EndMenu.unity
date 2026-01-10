@@ -492,7 +492,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Programming: Lifei Zeng\nAudio: Lifei Zeng\nArt&Assets: LifeiZeng\n\nSpecial
+  m_text: "Programming: Lifei Zeng\nAudio: Lifei Zeng\nArt&Assets: Lifei Zeng\n\nSpecial
     Thanks:\nFalse Knees \xA9  \u2022 Joshua Barkman\nVeliko Ivanov\n\nFinds more:\nhttps://jellyfei.itch.io/"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a22779d3e0da4414685d90123902d080, type: 2}
